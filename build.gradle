@@ -2,6 +2,7 @@ task clean {
   doLast {
     delete 'syncDest'
     delete 'copyDest'
+    delete 'otherSyncDest'
   }
 }
 
@@ -17,6 +18,14 @@ task myCopy(type: Copy) {
 task mySync(type: Sync) {
   into 'syncDest'
   into('.') {
+    from 'srcDir'
+  }
+}
+
+// This slightly different case works as expected; 'otherSyncDest/foo' contains the contents of the 'srcDir' directory.
+task otherSync(type: Sync) {
+  into 'otherSyncDest'
+  into('foo') {
     from 'srcDir'
   }
 }
