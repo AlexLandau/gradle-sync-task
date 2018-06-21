@@ -1,0 +1,22 @@
+task clean {
+  doLast {
+    delete 'syncDest'
+    delete 'copyDest'
+  }
+}
+
+// After running, the 'copyDest' folder contains the contents of the 'srcDir' directory.
+task myCopy(type: Copy) {
+  into 'copyDest'
+  into('.') {
+    from 'srcDir'
+  }
+}
+
+// After running, the 'syncDest' folder is empty.
+task mySync(type: Sync) {
+  into 'syncDest'
+  into('.') {
+    from 'srcDir'
+  }
+}
