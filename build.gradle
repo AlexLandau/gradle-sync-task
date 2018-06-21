@@ -6,6 +6,9 @@ task clean {
   }
 }
 
+// Note: In copy/sync specs, if there are multiple "into" blocks, every block after the first refers to a subpath of the
+// first "into"'s directory.
+
 // After running, the 'copyDest' folder contains the contents of the 'srcDir' directory.
 task myCopy(type: Copy) {
   into 'copyDest'
@@ -14,7 +17,7 @@ task myCopy(type: Copy) {
   }
 }
 
-// After running, the 'syncDest' folder is empty.
+// After running, the 'syncDest' folder is empty. This is the surprising behavior; I'd expect it to act like myCopy.
 task mySync(type: Sync) {
   into 'syncDest'
   into('.') {
