@@ -1,4 +1,7 @@
 /.gradle/
+/.idea/
 /copyDest/
 /syncDest/
 /otherSyncDest/
+/copyDupes1/
+/copyDupes2/

@@ -32,3 +32,27 @@ task otherSync(type: Sync) {
     from 'srcDir'
   }
 }
+
+// This task correctly fails
+task copyDupes1(type: Copy) {
+  into 'copyDupes1'
+  into('foo') {
+    from 'srcDir'
+  }
+  into('foo') {
+    from 'altSrcDir'
+  }
+  duplicatesStrategy = DuplicatesStrategy.FAIL
+}
+
+// This task does not fail, despite the duplicates strategy and the outputs overlapping
+task copyDupes2(type: Copy) {
+  into 'copyDupes2'
+  into('foo') {
+    from 'srcDir'
+  }
+  into('./foo') {
+    from 'altSrcDir'
+  }
+  duplicatesStrategy = DuplicatesStrategy.FAIL
+}
